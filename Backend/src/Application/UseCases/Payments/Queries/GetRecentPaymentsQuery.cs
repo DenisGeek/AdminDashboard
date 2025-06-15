@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 
 namespace Application;
 
-public class GetRecentPaymentsQuery(int Take = 5) : IRequest<IEnumerable<PaymentDto>>
-{
-    public int Take { get; } = Take;
-}
+public record GetRecentPaymentsQuery(int Take = 5) 
+    : IRequest<IEnumerable<PaymentDto>>;
+
