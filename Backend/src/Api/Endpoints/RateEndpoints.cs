@@ -12,10 +12,11 @@ public static class RateEndpoints
         var group = app.MapGroup("/rate")
             .WithTags("Rate");
 
-        group.MapGet("/", async (
-            [FromQuery] string? baseCurrency,
-            [FromQuery] string? targetCurrency,
-            IMediator mediator) =>
+        group.MapGet("/", 
+            async (
+                [FromQuery] string? baseCurrency,
+                [FromQuery] string? targetCurrency,
+                IMediator mediator) =>
         {
             var baseCurr = Enum.TryParse<Currency>(baseCurrency, out var b)
                 ? b : Currency.USD;
@@ -29,9 +30,10 @@ public static class RateEndpoints
         .Produces<RateDto>(StatusCodes.Status200OK)
         .WithName("GetCurrentRate");
 
-        group.MapPost("/", async (
-            [FromBody] UpdateRateRequest request,
-            IMediator mediator) =>
+        group.MapPost("/", 
+            async (
+                [FromBody] UpdateRateRequest request,
+                IMediator mediator) =>
         {
             var baseCurr = Enum.TryParse<Currency>(request.BaseCurrency, out var b)
                 ? b : Currency.USD;

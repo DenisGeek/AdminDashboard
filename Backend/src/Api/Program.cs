@@ -15,7 +15,8 @@ public class Program
         builder.Services
             .AddInfrastructureCommonDependencies(builder.Configuration)
             .AddInfrastructureSQLiteDependencies(builder.Configuration)
-            .AddApplicationDependencies(builder.Configuration);
+            .AddApplicationDependencies(builder.Configuration)
+            .AddApiDependencies(builder.Configuration);
 
         // Add services to the container.
         builder.Services.AddAuthorization();
@@ -36,6 +37,7 @@ public class Program
         }
 
         app
+            .MapAuthEndpoints()
             .MapClientEndpoints()
             .MapPaymentEndpoints()
             .MapRateEndpoints();

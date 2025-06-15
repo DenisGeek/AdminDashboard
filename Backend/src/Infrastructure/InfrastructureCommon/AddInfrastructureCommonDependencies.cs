@@ -13,7 +13,12 @@ public static class AddInfrastructureCommonDependenciesExtension
         services.AddScoped<IPaymentRepositoryGetRecent, PaymentRepository>();
         services.AddScoped<IRateRepositoryGet, RateRepository>();
         services.AddScoped<IRateRepositoryUpdate, RateRepository>();
-    
+
+        services.AddScoped<IAuthServiceAuthenticate, AuthService>();
+        services.AddScoped<IUserRepositoryGetByEmail, UserRepository>();
+        services.AddScoped<ITokenGenerator, DemoTokenGenerator>(); // По ТЗ возвращает "demo"
+        services.AddScoped<IPasswordHasher, BCryptPasswordHasher>();
+
         return services;
     }
 }

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
+using System.Net.Http.Headers;
 
 namespace Application;
 
@@ -17,6 +18,7 @@ internal class GetClientsQueryHandler : IRequestHandler<GetClientsQuery, List<Cl
     public async Task<List<ClientDto>> Handle(GetClientsQuery request, CancellationToken cancellationToken)
     {
         var clients = await _repository.GetAllAsync();
+
         return _mapper.Map<List<ClientDto>>(clients);
     }
 }

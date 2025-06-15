@@ -21,9 +21,4 @@ internal class PaymentRepository: IPaymentRepositoryGetRecent
             .AsNoTracking()
             .ToListAsync();
     }
-
-    public async Task<int> GetTotalPaymentsCountAsync()
-    {
-        return await _context.Payments.CountAsync();
-    }
 }

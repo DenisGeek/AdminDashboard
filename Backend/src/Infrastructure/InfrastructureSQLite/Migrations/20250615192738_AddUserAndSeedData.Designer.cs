@@ -3,6 +3,7 @@ using System;
 using InfrastructureSQLite;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InfrastructureSQLite.Migrations
 {
     [DbContext(typeof(AppDbContextSQLite))]
-    partial class AppDbContextSQLiteModelSnapshot : ModelSnapshot
+    [Migration("20250615192738_AddUserAndSeedData")]
+    partial class AddUserAndSeedData
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "9.0.6");
