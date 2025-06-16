@@ -71,4 +71,4 @@
       ```  
 
 - Дополнительно:  
-  - Postman коллекция: `Postman example - Admin Dashboard.json`  
+  - Postman коллекция: `Postman example.json`  
