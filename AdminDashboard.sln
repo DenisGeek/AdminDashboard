@@ -19,9 +19,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InfrastructureSQLite", "Bac
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InfrastructurePostgreSQL", "Backend\src\Infrastructure\InfrastructurePostgreSQL\InfrastructurePostgreSQL.csproj", "{91887572-7E7B-4D06-BB2F-05544F28BDC3}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B11EECC1-16D5-407D-B8D4-6B5C58D3B16F}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{67EDE92E-7DD7-4D9B-B9AA-6F41777C779E}"
 	ProjectSection(SolutionItems) = preProject
-		ReadMe.txt = ReadMe.txt
+		Postman example - Admin Dashboard.json = Postman example - Admin Dashboard.json
+		README.md = README.md
 	EndProjectSection
 EndProject
 Global
