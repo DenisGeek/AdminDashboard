@@ -4,10 +4,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 17.12.35527.113
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{34C3A3DB-3CA0-45A6-96AC-5F05B0796D27}"
-	ProjectSection(SolutionItems) = preProject
-		Postman example - Admin Dashboard.json = Postman example - Admin Dashboard.json
-		README.md = README.md
-	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Backend\src\Domain\Domain.csproj", "{E7DF848B-27D1-435F-8BC8-BDAFF3D1688A}"
 EndProject
