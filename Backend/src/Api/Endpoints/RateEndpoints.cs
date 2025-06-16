@@ -19,9 +19,9 @@ public static class RateEndpoints
                 IMediator mediator) =>
         {
             var baseCurr = Enum.TryParse<Currency>(baseCurrency, out var b)
-                ? b : Currency.USD;
+                ? b : Currency.Token;
             var targetCurr = Enum.TryParse<Currency>(targetCurrency, out var t)
-                ? t : Currency.Token;
+                ? t : Currency.USD;
 
             var query = new GetCurrentRateQuery(baseCurr, targetCurr);
             var result = await mediator.Send(query);
@@ -36,9 +36,9 @@ public static class RateEndpoints
                 IMediator mediator) =>
         {
             var baseCurr = Enum.TryParse<Currency>(request.BaseCurrency, out var b)
-                ? b : Currency.USD;
+                ? b : Currency.Token;
             var targetCurr = Enum.TryParse<Currency>(request.TargetCurrency, out var t)
-                ? t : Currency.Token;
+                ? t : Currency.USD;
 
             var command = new UpdateRateCommand(
                 request.NewRate,

@@ -30,8 +30,8 @@ public static class AuthEndpointsExtension
         .WithRequestValidation<LoginRequest>()
         .WithName("Login")
         .Produces<AuthResponse>(StatusCodes.Status200OK)
-        .ProducesValidationProblem()
-        .ProducesProblem(StatusCodes.Status401Unauthorized);
+        .ProducesValidationProblem();
+
 
 
 
