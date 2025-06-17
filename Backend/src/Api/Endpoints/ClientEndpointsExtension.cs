@@ -16,6 +16,7 @@ public static class ClientEndpointsExtension
             var result = await mediator.Send(query, ct);
             return Results.Ok(result);
         })
+        .RequireAuthorization()
         .Produces<IEnumerable<ClientDto>>(StatusCodes.Status200OK)
         .WithName("GetAllClients")
         .WithTags("Clients")

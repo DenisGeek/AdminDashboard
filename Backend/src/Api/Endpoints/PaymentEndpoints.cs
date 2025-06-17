@@ -18,6 +18,7 @@ public static class PaymentEndpoints
             var result = await mediator.Send(query, ct);
             return Results.Ok(result);
         })
+        .RequireAuthorization()
         .Produces<IEnumerable<PaymentDto>>(StatusCodes.Status200OK)
         .WithTags("Payments")
         .WithName("GetRecentPayments");

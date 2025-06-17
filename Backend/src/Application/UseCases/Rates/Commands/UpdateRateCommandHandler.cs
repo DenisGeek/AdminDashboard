@@ -7,17 +7,14 @@ namespace Application;
 internal class UpdateRateCommandHandler
     : IRequestHandler<UpdateRateCommand, RateDto>
 {
-    private readonly IRateRepositoryUpdate _rateWriteRepository;
-    private readonly IRateRepositoryGet _rateReadRepository;
+    private readonly IRateRepository _rateRepository;
     private readonly IMapper _mapper;
 
     public UpdateRateCommandHandler(
-        IRateRepositoryUpdate rateWriteRepository,
-        IRateRepositoryGet rateReadRepository,
+        IRateRepository rateRepository,
         IMapper mapper)
     {
-        _rateWriteRepository = rateWriteRepository;
-        _rateReadRepository = rateReadRepository;
+        _rateRepository = rateRepository;
         _mapper = mapper;
     }
 
@@ -32,8 +29,8 @@ internal class UpdateRateCommandHandler
             TargetCurrency = request.TargetCurrency
         };
 
-        await _rateWriteRepository.UpdateRateAsync(rate);
-        var updatedRate = await _rateReadRepository.GetCurrentRateAsync(
+        await _rateRepository.UpdateRateAsync(rate);
+        var updatedRate = await _rateRepository.GetCurrentRateAsync(
             request.BaseCurrency,
             request.TargetCurrency);
 

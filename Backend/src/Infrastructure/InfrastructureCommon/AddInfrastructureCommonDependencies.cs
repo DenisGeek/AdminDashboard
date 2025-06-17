@@ -11,15 +11,12 @@ public static class AddInfrastructureCommonDependenciesExtension
     {
         services.AddScoped<IClientsRepositoryGetAll, ClientRepository>();
         services.AddScoped<IPaymentRepositoryGetRecent, PaymentRepository>();
+        services.AddScoped<IRateRepository, RateRepository>();
         services.AddScoped<IRateRepositoryGet, RateRepository>();
-        services.AddScoped<IRateRepositoryUpdate, RateRepository>();
+        services.AddScoped<IUserRepository, UserRepository>();
 
-        services.AddScoped<IAuthServiceAuthenticate, AuthService>();
-        services.AddScoped<IUserRepositoryGetByEmail, UserRepository>();
-        services.AddScoped<ITokenGenerator, DemoTokenGenerator>(); // По ТЗ возвращает "demo"
-        services.AddScoped<IPasswordHasher, BCryptPasswordHasher>();
+        services.AddAuthDependencies(configuration);
 
         return services;
     }
 }
-

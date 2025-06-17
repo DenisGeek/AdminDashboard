@@ -1,6 +1,8 @@
 ﻿using Application;
 using Domain;
+using InfrastructureCommon;
 using MediatR;
+using Microsoft.AspNetCore.Authentication.OAuth;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api;
@@ -10,8 +12,10 @@ public static class RateEndpoints
     public static WebApplication MapRateEndpoints(this WebApplication app)
     {
         var group = app.MapGroup("/rate")
+            //.RequireAuthorization()
             .WithTags("Rate");
 
+        // GetCurrentRate
         group.MapGet("/", 
             async (
                 [FromQuery] string? baseCurrency,
@@ -30,6 +34,7 @@ public static class RateEndpoints
         .Produces<RateDto>(StatusCodes.Status200OK)
         .WithName("GetCurrentRate");
 
+        // UpdateRate
         group.MapPost("/", 
             async (
                 [FromBody] UpdateRateRequest request,
@@ -48,9 +53,21 @@ public static class RateEndpoints
             var result = await mediator.Send(command);
             return Results.Ok(result);
         })
+        //.RequireAuthorization(policy => policy.RequireRole(AuthConst.Role.Admin))
+        .WithRequestValidation<UpdateRateRequest>() // валидация
         .Produces<RateDto>(StatusCodes.Status200OK)
         .Produces(StatusCodes.Status400BadRequest)
         .WithName("UpdateRate");
+
+
+        // GetAllRates
+        group.MapGet("/all", async ([FromServices] IMediator mediator) =>
+        {
+            var result = await mediator.Send(new GetAllRatesQuery());
+            return Results.Ok(result);
+        })
+        .WithName("GetAllRates")
+        .Produces<IEnumerable<Rate>>(StatusCodes.Status200OK);
 
         return app;
     }

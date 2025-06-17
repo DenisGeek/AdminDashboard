@@ -4,13 +4,25 @@ using Microsoft.EntityFrameworkCore;
 
 namespace InfrastructureCommon;
 
-internal class RateRepository : IRateRepositoryGet, IRateRepositoryUpdate
+internal class RateRepository : IRateRepository
 {
     private readonly AppDbContext _context;
 
     public RateRepository(AppDbContext context)
     {
         _context = context;
+    }
+
+    public async Task<IEnumerable<Rate>> GetRateAllAsync()
+    {
+        var latestRates = await _context.Rates
+            .AsNoTracking()
+            .OrderByDescending(r => r.LastUpdated)
+            //.GroupBy(r => new { r.BaseCurrency, r.TargetCurrency })
+            //.Select(g => g.OrderByDescending(r => r.LastUpdated).First())
+            .ToListAsync();
+
+        return latestRates;
     }
 
     public async Task<Rate> GetCurrentRateAsync(Currency baseCurrency, Currency targetCurrency)

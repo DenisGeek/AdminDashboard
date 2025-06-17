@@ -7,4 +7,4 @@ using System.Threading.Tasks;
 
 namespace Application;
 
-public record LoginCommand(string Email, string Password) : IRequest<AuthResponse>;
+public record LoginCommand(string Email, string Password) : IRequest<AuthTokenResponseDto>;

@@ -12,7 +12,7 @@ public static class AddInfrastructureSQLiteDependenciesExtension
     {
         // Регистрируем соединение как Singleton
         services.AddSingleton<SqliteConnection>(_ => {
-            var conn = new SqliteConnection("Data Source=:memory:");
+            var conn = new SqliteConnection("Data Source=:memory:;Cache=Shared");
             conn.Open();
             return conn;
         });

@@ -3,7 +3,7 @@ using BCrypt.Net;
 
 namespace InfrastructureCommon;
 
-internal class BCryptPasswordHasher : IPasswordHasher
+internal class AuthBCryptPasswordHasher : IAuthPasswordHasher
 {
     private const int _workFactor = 11;
 

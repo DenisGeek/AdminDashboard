@@ -1,5 +1,7 @@
 ﻿using Application;
 using Domain;
+using FluentValidation;
+
 //using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -19,21 +21,17 @@ public static class AuthEndpointsExtension
             IMediator mediator
             ) =>
         {
-
             // Обработка
             var command = new LoginCommand(request.Email, request.Password);
             var result = await mediator.Send(command);
 
             // Успешный ответ
-            return TypedResults.Ok(new { result.Token });
+            return TypedResults.Ok(result);
         })
-        .WithRequestValidation<LoginRequest>()
+        .WithRequestValidation<LoginRequest>() // валидация
         .WithName("Login")
-        .Produces<AuthResponse>(StatusCodes.Status200OK)
+        .Produces<AuthTokenResponseDto>(StatusCodes.Status200OK)
         .ProducesValidationProblem();
-
-
-
 
         return app;
     }

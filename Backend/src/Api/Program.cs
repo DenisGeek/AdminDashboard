@@ -1,8 +1,6 @@
-
-using InfrastructureCommon;
-using InfrastructureSQLite;
-using Microsoft.EntityFrameworkCore;
 using Application;
+using InfrastructureSQLite;
+using Microsoft.OpenApi.Models;
 
 namespace Api;
 
@@ -18,12 +16,10 @@ public class Program
             .AddApplicationDependencies(builder.Configuration)
             .AddApiDependencies(builder.Configuration);
 
-        // Add services to the container.
-        builder.Services.AddAuthorization();
-
-        // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-        builder.Services.AddEndpointsApiExplorer();
-        builder.Services.AddSwaggerGen();
+        builder.Services
+            .AddAuthorization()
+            .AddEndpointsApiExplorer()
+            .AddSwaggerGenHeader();
 
         builder.Services.AddEnumAsStringInJsonOutput();
 

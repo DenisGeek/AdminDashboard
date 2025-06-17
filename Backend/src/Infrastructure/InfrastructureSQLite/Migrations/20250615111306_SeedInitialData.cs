@@ -22,9 +22,9 @@ namespace InfrastructureSQLite.Migrations
                 columns: new[] { "Id", "Name", "Email", "BalanceInTokens", "CreatedAt", "UpdatedAt" },
                 values: new object[,]
                 {
-                    { client1Id, "Иван Сидоров", "ivan@example.com", 0m, DateTime.Now.AddDays(-10), null },
-                    { client2Id, "Ольга Петрова", "olga@example.com", 0m, DateTime.Now.AddDays(-5), null },
-                    { client3Id, "Алексей Козлов", "alex@example.com", 0m, DateTime.Now.AddDays(-2), null }
+                    { client1Id, "Иван Сидоров", "ivan@example.com", 0m, DateTime.UtcNow.AddDays(-10), null },
+                    { client2Id, "Ольга Петрова", "olga@example.com", 0m, DateTime.UtcNow.AddDays(-5), null },
+                    { client3Id, "Алексей Козлов", "alex@example.com", 0m, DateTime.UtcNow.AddDays(-2), null }
                 });
 
             // Add exchange rates (1 Token = 10 USD, 1 USD = 0.1 Token)
@@ -36,14 +36,14 @@ namespace InfrastructureSQLite.Migrations
                     {
                         tokentoUsdRateId,
                         10.00m, // 1 Token = 10 USD
-                        DateTime.Now,
+                        DateTime.UtcNow,
                         Currency.Token.ToString(),
                         Currency.USD.ToString()
                     },
                     {
                         usdToTokenRateId,
                         0.10m, // 1 USD = 0.1 Token
-                        DateTime.Now,
+                        DateTime.UtcNow,
                         Currency.USD.ToString(),
                         Currency.Token.ToString()
                     }
@@ -111,7 +111,7 @@ namespace InfrastructureSQLite.Migrations
                         payment.ClientId,
                         payment.Amount,
                         payment.Currency,
-                        DateTime.Now,
+                        DateTime.UtcNow,
                         "Тестовый платеж",
                         payment.Status.ToString()
                     });
@@ -137,21 +137,21 @@ namespace InfrastructureSQLite.Migrations
                 keyColumn: "Id",
                 keyValue: client1Id,
                 columns: new[] { "BalanceInTokens", "UpdatedAt" },
-                values: new object[] { client1Balance, DateTime.Now });
+                values: new object[] { client1Balance, DateTime.UtcNow });
 
             migrationBuilder.UpdateData(
                 table: "Clients",
                 keyColumn: "Id",
                 keyValue: client2Id,
                 columns: new[] { "BalanceInTokens", "UpdatedAt" },
-                values: new object[] { client2Balance, DateTime.Now });
+                values: new object[] { client2Balance, DateTime.UtcNow });
 
             migrationBuilder.UpdateData(
                 table: "Clients",
                 keyColumn: "Id",
                 keyValue: client3Id,
                 columns: new[] { "BalanceInTokens", "UpdatedAt" },
-                values: new object[] { client3Balance, DateTime.Now });
+                values: new object[] { client3Balance, DateTime.UtcNow });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

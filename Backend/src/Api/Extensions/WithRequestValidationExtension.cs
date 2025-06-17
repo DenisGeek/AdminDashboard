@@ -2,7 +2,7 @@
 
 namespace Api;
 
-public static class RouteHandlerBuilderExtensions
+public static class WithRequestValidationExtension
 {
     public static RouteHandlerBuilder WithRequestValidation<TRequest>(
         this RouteHandlerBuilder builder)
