@@ -44,9 +44,10 @@
     ```  
     - Ответ:  
       ```json  
-      {  
-        "token": "demo"  
-      }  
+        {
+          "access": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI5YWM1MTMwZi1lNmU5LTQ1ZWItYjFmZS0zMmRjM2VlMGU4Y2QiLCJlbWFpbCI6ImFkbWluQG1pcnJhLmRldiIsInJvbGUiOiJBZG1pbiIsIm5iZiI6MTc1MDIzNDg0MSwiZXhwIjoxNzUwMjM1MDIxLCJpYXQiOjE3NTAyMzQ4NDEsImlzcyI6Imh0dHBzOi8vbWlycmEucGx1cy8iLCJhdWQiOiJodHRwczovL21pcnJhLnBsdXMvIn0.GIxP826oyoKm2aIw4SFYO5mb6lKh5SJb0IriJcnrdwI",
+          "refresh": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI5YWM1MTMwZi1lNmU5LTQ1ZWItYjFmZS0zMmRjM2VlMGU4Y2QiLCJuYmYiOjE3NTAyMzQ4NDEsImV4cCI6MTc1MDgzOTY0MSwiaWF0IjoxNzUwMjM0ODQxLCJpc3MiOiJodHRwczovL21pcnJhLnBsdXMvIiwiYXVkIjoiaHR0cHM6Ly9taXJyYS5wbHVzLyJ9.C7ODJJA--KIOATqNjEGg0EEv7WXztRwtbHXG484JSGo"
+        } 
       ```  
 
   - Получение платежей (`GET /payments?take=N`):  
