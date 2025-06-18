@@ -37,23 +37,23 @@ internal class AuthService : IAuthServiceAuthenticate
             var user = await _userRepository.GetByEmailAsync(email);
             if (user == null)
             {
-                _logger.LogWarning(AuthConst.LogMessages.AuthenticationFailedUserNotFound, email);
+                _logger.LogWarning(AuthConst.LogMessages.Authentication.FailedUserNotFound, email);
                 return AuthResult.Failed(AuthConst.ErrorMessages.InvalidCredentials);
             }
 
             if (!_passwordHasher.Verify(password, user.PasswordHash))
             {
-                _logger.LogWarning(AuthConst.LogMessages.AuthenticationFailedInvalidPassword, user.Id);
+                _logger.LogWarning(AuthConst.LogMessages.Authentication.FailedInvalidPassword, user.Id);
                 return AuthResult.Failed(AuthConst.ErrorMessages.InvalidCredentials);
             }
 
             var token = _tokenGenerator.Generate(user);
-            _logger.LogInformation(AuthConst.LogMessages.AuthenticationSuccessful, user.Id);
+            _logger.LogInformation(AuthConst.LogMessages.Authentication.Successful, user.Id);
             return AuthResult.Successful(token);
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, AuthConst.LogMessages.AuthenticationError, email);
+            _logger.LogError(ex, AuthConst.LogMessages.Authentication.Error, email);
             return AuthResult.Failed(AuthConst.ErrorMessages.AuthenticationFailed);
         }
     }
@@ -65,31 +65,31 @@ internal class AuthService : IAuthServiceAuthenticate
             var principal = GetPrincipalFromToken(refreshToken, isAccessToken: false);
             if (principal == null)
             {
-                _logger.LogWarning(AuthConst.LogMessages.RefreshFailedInvalidToken);
+                _logger.LogWarning(AuthConst.LogMessages.Refresh.FailedInvalidToken);
                 return AuthResult.Failed(AuthConst.ErrorMessages.InvalidRefreshToken);
             }
 
             var userIdClaim = principal.FindFirst(ClaimTypes.NameIdentifier);
             if (userIdClaim == null || !Guid.TryParse(userIdClaim.Value, out var userId))
             {
-                _logger.LogWarning(AuthConst.LogMessages.RefreshFailedInvalidUserId);
+                _logger.LogWarning(AuthConst.LogMessages.Refresh.FailedInvalidUserId);
                 return AuthResult.Failed(AuthConst.ErrorMessages.InvalidTokenContent);
             }
 
             var user = await _userRepository.GetByIdAsync(userId);
             if (user == null)
             {
-                _logger.LogWarning(AuthConst.LogMessages.RefreshFailedUserNotFound, userId);
+                _logger.LogWarning(AuthConst.LogMessages.Refresh.FailedUserNotFound, userId);
                 return AuthResult.Failed(AuthConst.ErrorMessages.UserNotFound);
             }
 
             var newToken = _tokenGenerator.Generate(user);
-            _logger.LogInformation(AuthConst.LogMessages.RefreshSuccessful, userId);
+            _logger.LogInformation(AuthConst.LogMessages.Refresh.Successful, userId);
             return AuthResult.Successful(newToken);
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, AuthConst.LogMessages.RefreshError);
+            _logger.LogError(ex, AuthConst.LogMessages.Refresh.Error);
             return AuthResult.Failed(AuthConst.ErrorMessages.TokenRefreshFailed);
         }
     }
@@ -119,17 +119,17 @@ internal class AuthService : IAuthServiceAuthenticate
         }
         catch (SecurityTokenExpiredException)
         {
-            _logger.LogWarning(AuthConst.LogMessages.TokenValidationExpired);
+            _logger.LogWarning(AuthConst.LogMessages.TokenValidation.Expired);
             return null;
         }
         catch (SecurityTokenInvalidSignatureException)
         {
-            _logger.LogWarning(AuthConst.LogMessages.TokenValidationInvalidSignature);
+            _logger.LogWarning(AuthConst.LogMessages.TokenValidation.InvalidSignature);
             return null;
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, AuthConst.LogMessages.TokenValidationError);
+            _logger.LogError(ex, AuthConst.LogMessages.TokenValidation.Error);
             return null;
         }
     }

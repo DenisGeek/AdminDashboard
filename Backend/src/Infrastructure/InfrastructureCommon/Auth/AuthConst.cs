@@ -2,9 +2,6 @@
 
 namespace InfrastructureCommon;
 
-/// <summary>
-/// Provides role constants used for authorization throughout the application.
-/// </summary>
 public static class AuthConst
 {
     public static class Role
@@ -50,22 +47,28 @@ public static class AuthConst
 
     public static class LogMessages
     {
-        // Аутентификация
-        public const string AuthenticationFailedUserNotFound = "Authentication failed for email: {Email} - user not found";
-        public const string AuthenticationFailedInvalidPassword = "Authentication failed for user {UserId} - invalid password";
-        public const string AuthenticationSuccessful = "User {UserId} authenticated successfully";
-        public const string AuthenticationError = "Error during authentication for email: {Email}";
+        public static class Authentication
+        {
+            public const string FailedUserNotFound = "Authentication failed for email: {Email} - user not found";
+            public const string FailedInvalidPassword = "Authentication failed for user {UserId} - invalid password";
+            public const string Successful = "User {UserId} authenticated successfully";
+            public const string Error = "Error during authentication for email: {Email}";
+        }
 
-        // Обновление токена (Refresh)
-        public const string RefreshFailedInvalidToken = "Refresh failed - invalid refresh token";
-        public const string RefreshFailedInvalidUserId = "Refresh failed - missing or invalid user ID in token";
-        public const string RefreshFailedUserNotFound = "Refresh failed - user {UserId} not found";
-        public const string RefreshSuccessful = "Token refreshed successfully for user {UserId}";
-        public const string RefreshError = "Error during token refresh";
+        public static class Refresh
+        {
+            public const string FailedInvalidToken = "Refresh failed - invalid refresh token";
+            public const string FailedInvalidUserId = "Refresh failed - missing or invalid user ID in token";
+            public const string FailedUserNotFound = "Refresh failed - user {UserId} not found";
+            public const string Successful = "Token refreshed successfully for user {UserId}";
+            public const string Error = "Error during token refresh";
+        }
 
-        // Валидация токена
-        public const string TokenValidationExpired = "Token validation failed - token expired";
-        public const string TokenValidationInvalidSignature = "Token validation failed - invalid signature";
-        public const string TokenValidationError = "Token validation failed";
+        public static class TokenValidation
+        {
+            public const string Expired = "Token validation failed - token expired";
+            public const string InvalidSignature = "Token validation failed - invalid signature";
+            public const string Error = "Token validation failed";
+        }
     }
 }
