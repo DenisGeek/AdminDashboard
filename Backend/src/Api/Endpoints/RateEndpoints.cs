@@ -2,7 +2,6 @@
 using Domain;
 using InfrastructureCommon;
 using MediatR;
-using Microsoft.AspNetCore.Authentication.OAuth;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api;
@@ -12,7 +11,7 @@ public static class RateEndpoints
     public static WebApplication MapRateEndpoints(this WebApplication app)
     {
         var group = app.MapGroup("/rate")
-            //.RequireAuthorization()
+            .RequireAuthorization()
             .WithTags("Rate");
 
         // GetCurrentRate
@@ -53,7 +52,7 @@ public static class RateEndpoints
             var result = await mediator.Send(command);
             return Results.Ok(result);
         })
-        //.RequireAuthorization(policy => policy.RequireRole(AuthConst.Role.Admin))
+        .RequireAuthorization(policy => policy.RequireRole(AuthConst.Role.Admin))
         .WithRequestValidation<UpdateRateRequest>() // валидация
         .Produces<RateDto>(StatusCodes.Status200OK)
         .Produces(StatusCodes.Status400BadRequest)
